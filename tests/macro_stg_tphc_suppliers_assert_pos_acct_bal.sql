@@ -1,3 +1,5 @@
+-- depends_on: {{ ref('stg_tpch_suppliers') }}
+
 {{
     config(
         enabled=true,
