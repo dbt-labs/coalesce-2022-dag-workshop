@@ -1,1 +1,0 @@
-select dbt_isobral.string_reverse_nulls(null) value
