@@ -4,8 +4,8 @@ version: 2
 sources:
   - name: tpch
     description: Welcome to the dbt Labs demo dbt project! We use the [TPCH dataset](https://docs.snowflake.com/en/user-guide/sample-data-tpch.html) to create a sample project to emulate what a production project might look like!
-    database: raw
-    schema: tpch_sf001
+    database: RAW_TPCH
+    schema: TPCH_SF1
     tables:
       - name: orders
         description: main order tracking table
@@ -13,14 +13,14 @@ sources:
           warn_after: {count: 6, period: hour}
           # error_after: {count: 12, period: hour}
         loaded_at_field: o_orderdate::timestamp
-        
+
         columns:
           - name: o_orderkey
             description: SF*1,500,000 are sparsely populated
-            tests: 
+            tests:
               - unique
               - not_null
-                  
+
           - name: o_custkey
             description: Foreign Key to C_CUSTKEY
             tests:
@@ -41,7 +41,7 @@ sources:
             description: numeric representation of the shipping priority, zero being the default
           - name: o_comment
             description: '{{ doc("comment") }}'
-          
+
       - name: customer
         description: main customer table
         columns:
@@ -61,7 +61,7 @@ sources:
           - name: c_phone
             description: phone number of the customer
           - name: c_acctbal
-            description: raw account balance 
+            description: raw account balance
           - name: c_mktsegment
             description: market segment of the customer
           - name: c_comment
@@ -181,7 +181,7 @@ sources:
           - name: ps_availqty
             description: raw available quantity
           - name: ps_supplycost
-            description: raw cost 
+            description: raw cost
           - name: ps_comment
             description: '{{ doc("comment") }}'
 

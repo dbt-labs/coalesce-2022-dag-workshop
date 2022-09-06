@@ -1,4 +1,14 @@
+# Python directories
+venv/
+
+# dbt directories
+
 target/
 dbt_modules/
 dbt_packages/
 logs/
+
+# dbt profiles and user config files
+
+profiles.yml
+.user.yml
