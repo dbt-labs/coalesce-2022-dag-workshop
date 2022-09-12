@@ -20,5 +20,4 @@ final as (
     from materializations
 )
 
-
 select * from final
