@@ -1,0 +1,22 @@
+version: 2
+
+
+sources:
+  - name: dbt
+    schema: {{ target.schema }}
+    tables:
+
+      - name: dbt_materializations
+        description: >
+          Model materialization metadata form previous dbt runs.
+        columns:
+          - name: materialization_id
+          - name: node_unique_id
+          - name: invocation_id
+          - name: model
+          - name: status
+          - name: meta
+          - name: execution_started_at
+          - name: execution_completed_at
+          - name: execution_time_seconds
+          - name: recorded_at
