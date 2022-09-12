@@ -3,14 +3,19 @@ version: 2
 
 sources:
   - name: dbt
-    schema: {{ target.schema }}
+    schema: "{{ target.schema }}"
     tables:
 
-      - name: dbt_materializations
+      - name: materializations
+        identifier: dbt_materializations
         description: >
           Model materialization metadata form previous dbt runs.
         columns:
           - name: materialization_id
+            description: > 
+              Unique ID for every materialization of a model. Created as a 
+              surrogate key of invocation_id and node_unique_id.
+
           - name: node_unique_id
           - name: invocation_id
           - name: model

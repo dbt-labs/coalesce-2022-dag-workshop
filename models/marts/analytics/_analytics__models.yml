@@ -1,0 +1,13 @@
+version: 2
+
+models:
+
+  - name: fct_materializations
+    description: >
+      dbt model materialization events.
+
+    meta:
+      maturity: low
+      owner:
+        email: nicholas@jaffle.shop
+        department: Analytics
