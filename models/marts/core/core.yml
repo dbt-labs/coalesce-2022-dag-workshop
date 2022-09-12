@@ -3,6 +3,13 @@ version: 2
 models:
   - name: dim_customers
     description: Customer dimensions table
+
+    meta:
+      maturity: high
+      owner:
+        email: dori@jaffle.shop
+        department: Operations
+
     columns:
       - name: customer_key
         description: Primary key on the customers table
@@ -31,6 +38,13 @@ models:
 
   - name: dim_parts
     description: Parts dimensions table
+
+    meta:
+      maturity: high
+      owner:
+        email: hope@jaffle.shop
+        department: Operations
+
     columns:
       - name: part_key
         description: primary key of the model
@@ -54,6 +68,13 @@ models:
 
   - name: dim_suppliers
     description: Suppliers dimensions table
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Operations
+
     columns:
       - name: supplier_key
         description: primary key of the model
@@ -72,9 +93,16 @@ models:
         description: '{{ doc("phone_number") }}'
       - name: account_balance
         description: '{{ doc("account_balance") }}'
- 
+
   - name: fct_order_items
     description: order items fact table
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Operations
+
     columns:
       - name: order_item_key
         description: '{{ doc("order_item_key") }}'
@@ -133,9 +161,16 @@ models:
         description: '{{ doc("item_tax_amount") }}'
       - name: net_item_sales_amount
         description: '{{ doc("net_item_sales_amount") }}'
-  
+
   - name: fct_orders
     description: orders fact table
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Operations
+
     columns:
       - name: order_key
         description: primary key of the model

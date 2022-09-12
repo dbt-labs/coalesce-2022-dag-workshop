@@ -3,6 +3,13 @@ version: 2
 models:
   - name: stg_tpch_customers
     description: staging layer for customers data
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Analytics
+
     columns:
       - name: customer_key
         description: primary key of the model
@@ -26,6 +33,13 @@ models:
 
   - name: stg_tpch_line_items
     description: staging layer for line items data
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Analytics
+
     columns:
       - name: order_item_key
         description: '{{ doc("order_item_key") }}'
@@ -67,6 +81,13 @@ models:
 
   - name: stg_tpch_nations
     description: staging layer for nations data
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Analytics
+
     columns:
       - name: nation_key
         description: primary key of the model
@@ -78,10 +99,17 @@ models:
       - name: region_key
         description: foreign key to stg_tpch_regions
       - name: comment
-        description: additional commentary             
- 
+        description: additional commentary
+
   - name: stg_tpch_orders
     description: staging layer for orders data
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Analytics
+
     columns:
       - name: order_key
         description: primary key of the model
@@ -107,6 +135,14 @@ models:
 
   - name: stg_tpch_part_suppliers
     description: staging layer for suppliers data
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Analytics
+
+
     columns:
       - name: part_supplier_key
         description: surrogate key for the model -- combo of ps_partkey + ps_suppkey
@@ -123,9 +159,17 @@ models:
         description: '{{ doc("cost") }}'
       - name: comment
         description: '{{ doc("comment") }}'
-            
+
   - name: stg_tpch_parts
     description: staging layer for parts data
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Analytics
+
+
     columns:
       - name: part_key
         description: primary key of the model
@@ -151,6 +195,13 @@ models:
 
   - name: stg_tpch_regions
     description: staging layer for regions data
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Analytics
+
     columns:
       - name: region_key
         description: primary key of the model
@@ -164,6 +215,13 @@ models:
 
   - name: stg_tpch_suppliers
     description: staging layer for suppliers data
+
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Analytics
+
     columns:
       - name: supplier_key
         description: primary key of the model

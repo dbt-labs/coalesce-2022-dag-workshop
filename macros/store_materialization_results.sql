@@ -49,17 +49,11 @@
       '{{ result.node.unique_id }}'::text as node_unique_id,
       '{{ invocation_id }}'::text as invocation_id,
       '{{ result.node.name }}'::text as model,
-      '{{ result.node.schema }}'::text as "schema",
-      '{{ result.node.database }}'::text as "database",
-      '{{ result.node.config.materialized }}'::text as materialization,
       '{{ result.status }}'::text as status,
-      '{{ timing["compile"]["started_at"] }}'::timestamptz as compile_started_at,
-      '{{ timing["compile"]["completed_at"] }}'::timestamptz as compile_completed_at,
+      to_variant(parse_json('{{ tojson(result.node.config.meta) }}')) as meta,
       '{{ timing["execute"]["started_at"] }}'::timestamptz as execution_started_at,
-      '{{ timing["execute"]["completed_at"] }}'::timestamptz as execution_ended_at,
+      '{{ timing["execute"]["completed_at"] }}'::timestamptz as execution_completed_at,
       '{{ result.execution_time }}'::float as execution_time_seconds,
-      '{{ result.node.original_file_path }}'::text as model_file_path,
-      '{{ result.node.checksum.checksum }}'::text as checksum,
       current_timestamp as recorded_at
 
     {{ "union all" if not loop.last }}

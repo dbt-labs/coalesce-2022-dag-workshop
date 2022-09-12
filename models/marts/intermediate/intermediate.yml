@@ -3,6 +3,12 @@ version: 2
 models:
   - name: order_items
     description: Intermediate model where we calculate item price, discounts and tax. This model is at the order item level.
+    meta:
+      maturity: high
+      owner:
+        email: alice@jaffle.shop
+        department: Operations
+
     tags:
       - output_table_type|orders
     columns:
@@ -59,9 +65,16 @@ models:
         description: item level tax total
       - name: net_item_sales_amount
         description: '{{ doc("net_item_sales_amount") }}'
-  
+
   - name: part_suppliers
     description: Intermediate model where we join part, supplier and part_supplier. This model is at the part supplier level.
+
+    meta:
+      maturity: high
+      owner:
+        email: hope@jaffle.shop
+        department: Operations
+
     columns:
       - name: part_supplier_key
         description: primary key of the models
