@@ -29,6 +29,11 @@ vars:
   vars:
     'dbt_date:time_zone': 'America/New_York'
 
+
+# Store run results from each run within the data warehouse.
+on-run-end: "{{ store_materialization_results(results, 'dbt_materializations') }}"
+
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 models:
