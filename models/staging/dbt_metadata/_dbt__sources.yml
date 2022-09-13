@@ -9,7 +9,7 @@ sources:
       - name: materializations
         identifier: dbt_materializations
         description: >
-          Model materialization metadata form previous dbt runs.
+          Model materialization metadata from previous dbt runs.
         columns:
           - name: materialization_id
             description: > 
