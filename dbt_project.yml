@@ -32,7 +32,7 @@ vars:
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 models:
-  tpch:
+  coalesce_2022_dag_workshop:
     staging:
       +materialized: view
 
@@ -40,12 +40,3 @@ models:
       core:
         materialized: table
 
-  snowflake_spend:
-    enabled: true
-
-seeds:
-  tpch:
-    snowflake_contract_rates:
-      +column_types:
-        effective_date: DATE
-        rate: NUMBER
