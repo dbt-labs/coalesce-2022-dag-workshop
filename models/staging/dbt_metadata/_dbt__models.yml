@@ -16,9 +16,9 @@ models:
 
       - name: maturity
         description: >
-          The overall maturity of the model. This indicates how 
-          robust this model is relative to Jaffle Shop's data platform. Maturity
-          should be consulted when this model.
+          The overall maturity of the model. This indicates how robust
+          this model is relative to Jaffle Shop's data platform. Maturity
+          should be consulted when referencing this model in the future.
         tests:
           - accepted_values:
               values: ['low', 'medium', 'high']
