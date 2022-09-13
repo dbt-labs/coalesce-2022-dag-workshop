@@ -16,7 +16,7 @@ models:
 
       - name: maturity
         description: >
-          The overal maturity of the model. This indicates how 
+          The overall maturity of the model. This indicates how 
           robust this model is relative to Jaffle Shop's data platform. Maturity
           should be consulted when this model.
         tests:
