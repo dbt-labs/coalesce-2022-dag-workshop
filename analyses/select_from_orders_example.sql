@@ -1,6 +1,5 @@
 
 
-SELECT order_key, 
-       order_date, 
-       {{ standard_account_fields() }} 
+SELECT order_key,
+       order_date
 FROM {{ ref('fct_orders') }}

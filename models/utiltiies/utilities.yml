@@ -10,7 +10,7 @@ models:
     meta:
       maturity: medium
       owner:
-        email: alice@jaffle.shop
+        email: nicholas@jaffle.shop
         department: Analytics
 
     columns:

@@ -1,4 +1,4 @@
--- depends_on: {{ ref('stg_tpch_orders') }}
+-- depends_on: {{ ref('stg_tpch__orders') }}
 
 {{
     config(
@@ -9,4 +9,4 @@
 }}
 
 
-{{ test_all_values_gte_zero('stg_tpch_orders', 'total_price') }}
+{{ test_all_values_gte_zero('stg_tpch__orders', 'total_price') }}
