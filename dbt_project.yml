@@ -39,7 +39,6 @@ on-run-end:
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 models:
-  +pre-hook: "{{ ref_maturity_warning(['low']) }}"
 
   tpch:
     staging:
