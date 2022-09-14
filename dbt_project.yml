@@ -31,7 +31,9 @@ vars:
 
 
 # Store run results from each run within the data warehouse.
-on-run-end: "{{ store_materialization_results(results, 'dbt_materializations') }}"
+on-run-end:
+  - "{{ store_materialization_results(results, 'dbt_materializations') }}"
+  - "{{ ref_maturity_warning(['low']) }}"
 
 
 # Configuring models
