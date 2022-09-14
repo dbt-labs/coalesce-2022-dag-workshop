@@ -37,6 +37,8 @@ on-run-end: "{{ store_materialization_results(results, 'dbt_materializations') }
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 models:
+  +pre-hook: "{{ ref_maturity_warning(['low']) }}"
+
   tpch:
     staging:
       +materialized: view
