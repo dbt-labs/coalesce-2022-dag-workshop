@@ -7,20 +7,20 @@
 
 with customer as (
 
-    select * from {{ ref('stg_tpch_customers') }}
+    select * from {{ ref('stg_tpch__customers') }}
 
 ),
 nation as (
 
-    select * from {{ ref('stg_tpch_nations') }}
+    select * from {{ ref('stg_tpch__nations') }}
 ),
 region as (
 
-    select * from {{ ref('stg_tpch_regions') }}
+    select * from {{ ref('stg_tpch__regions') }}
 
 ),
 final as (
-    select 
+    select
         customer.customer_key,
         customer.name,
         customer.address,
@@ -38,7 +38,7 @@ final as (
         inner join region
             on nation.region_key = region.region_key
 )
-select 
+select
     *
 from
     final

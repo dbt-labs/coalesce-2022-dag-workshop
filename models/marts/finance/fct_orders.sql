@@ -6,18 +6,18 @@
 }}
 
 with orders as (
-    
-    select * from {{ ref('stg_tpch_orders') }} 
+
+    select * from {{ ref('stg_tpch__orders') }}
 
 ),
 order_item as (
-    
+
     select * from {{ ref('order_items') }}
 
 ),
 order_item_summary as (
 
-    select 
+    select
         order_key,
         sum(gross_item_sales_amount) as gross_item_sales_amount,
         sum(item_discount_amount) as item_discount_amount,
@@ -29,17 +29,17 @@ order_item_summary as (
 ),
 final as (
 
-    select 
+    select
 
-        orders.order_key, 
+        orders.order_key,
         orders.order_date,
         orders.customer_key,
         orders.status_code,
         orders.priority_code,
         orders.clerk_name,
         orders.ship_priority,
-                
-        1 as order_count,                
+
+        1 as order_count,
         order_item_summary.gross_item_sales_amount,
         order_item_summary.item_discount_amount,
         order_item_summary.item_tax_amount,
@@ -49,7 +49,7 @@ final as (
         inner join order_item_summary
             on orders.order_key = order_item_summary.order_key
 )
-select 
+select
     *
 from
     final

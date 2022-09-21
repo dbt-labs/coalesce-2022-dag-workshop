@@ -1,16 +1,16 @@
 
 with orders as (
-    
-    select * from {{ ref('stg_tpch_orders') }}
+
+    select * from {{ ref('stg_tpch__orders') }}
 
 ),
 
 line_item as (
 
-    select * from {{ ref('stg_tpch_line_items') }}
+    select * from {{ ref('stg_tpch__line_items') }}
 
 )
-select 
+select
 
     line_item.order_item_key,
     orders.order_key,
@@ -19,10 +19,10 @@ select
     line_item.supplier_key,
     orders.order_date,
     orders.status_code as order_status_code,
-    
-    
+
+
     line_item.return_flag,
-    
+
     line_item.line_number,
     line_item.status_code as order_item_status_code,
     line_item.ship_date,
@@ -31,7 +31,7 @@ select
     line_item.ship_mode,
     line_item.extended_price,
     line_item.quantity,
-    
+
     -- extended_price is actually the line item total,
     -- so we back out the extended price per item
     (line_item.extended_price/nullif(line_item.quantity, 0)){{ money() }} as base_price,
@@ -45,8 +45,8 @@ select
     line_item.tax_rate,
     ((gross_item_sales_amount + item_discount_amount) * line_item.tax_rate){{ money() }} as item_tax_amount,
     (
-        gross_item_sales_amount + 
-        item_discount_amount + 
+        gross_item_sales_amount +
+        item_discount_amount +
         item_tax_amount
     ){{ money() }} as net_item_sales_amount
 
