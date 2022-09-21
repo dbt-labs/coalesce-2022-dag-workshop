@@ -15,6 +15,18 @@ models:
       - name: order_year
         description: year of the order
 
+
+  - name: agg_department_warehouse_usage
+    meta:
+      maturity: low
+      owner:
+        email: nicholas@jaffle.shop
+        department: Analytics
+
+    columns:
+      - name: materialization_month
+        description: Month of the materialization_event
+
   - name: monthly_gross_revenue
 
     meta:

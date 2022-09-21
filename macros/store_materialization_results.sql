@@ -1,6 +1,5 @@
 {% macro store_materialization_results(results, table_name) %}
 
-
   {%- set central_tbl -%}
     {{ target.schema }}.{{ table_name }}
   {%- endset -%}
@@ -24,7 +23,6 @@
 
   {% if execute %}
     {% set central_table_exists = run_query(central_table_query) %}
-
 
     {% if central_table_exists%}
       insert into {{ central_tbl }} (
@@ -67,4 +65,5 @@
     );
 
     {% endif %}
+
 {% endmacro %}
