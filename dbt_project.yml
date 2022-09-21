@@ -30,10 +30,9 @@ vars:
     'dbt_date:time_zone': 'America/New_York'
 
 
-# Store run results from each run within the data warehouse.
 on-run-end:
+  # Store run results from each run within the data warehouse.
   - "{{ store_materialization_results(results, 'dbt_materializations') }}"
-  - "{{ ref_maturity_warning(['low']) }}"
 
 
 # Configuring models
