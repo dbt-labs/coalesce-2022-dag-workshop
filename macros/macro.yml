@@ -38,6 +38,10 @@ macros:
       referencing upstream dependencies with a maturity metadata field provided
       in the `warning_maturity_levels` argumnent.
     arguments:
+      - name: current_model
+        type: CompiledNode
+        description: >
+          A graph node object that is being checked for referencing immature models.
       - name: warning_maturity_levels
         type: List[String]
         description: A list of maturity levels that we want to consider being immature.
