@@ -23,7 +23,7 @@
     {% if immature_model_list | length > 0 %}
         {{ log(
             "WARNING: The " ~ current_model.name ~ " model references immature models. " ~
-            "Models: " ~ ', '.join(immature_model_list),
+            "Immature models: " ~ ', '.join(immature_model_list),
             info=True
         ) }}
     {% endif %}

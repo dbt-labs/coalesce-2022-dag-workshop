@@ -14,7 +14,7 @@
     {{ return('select 1') }}
   {%- endif -%}
 
-  {{ log("Processing materialization results. Results will be store in `" + central_tbl ~ "`.", info = true) if execute }}
+  {{ log("Processing materialization results. Results will be stored in `" + central_tbl ~ "`.", info = true) if execute }}
 
   {#
 		Check if the target table exists. If it does, then insert into it. Otherwise, create it.
