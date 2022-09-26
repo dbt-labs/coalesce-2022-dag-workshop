@@ -213,7 +213,7 @@ models:
       - name: comment
         description: '{{ doc("comment") }}'
 
-  - name: stg_tpch_suppliers
+  - name: stg_tpch__suppliers
     description: staging layer for suppliers data
 
     meta:
