@@ -33,9 +33,6 @@
     {# For each result in the run result set, process and store the result. #}
     {% for result in materialization_results %}
 
-      {# Check if this model references models with a low maturity.#}
-      {{ ref_maturity_warning(current_model = result.node, warning_maturity_levels=['low']) }}
-
       {# Remap the timing list into a dictionary of values #}
       {% set timing = {} %}
       {% for timing_record in result.timing%}

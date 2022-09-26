@@ -31,17 +31,3 @@ macros:
         type: STRING
         description: >
           The name of the table in which to store materialization results.
-
-  - name: ref_maturity_warning
-    description: >
-      Introspect on the project's graph to identify instances where models are
-      referencing upstream dependencies with a maturity metadata field provided
-      in the `warning_maturity_levels` argumnent.
-    arguments:
-      - name: current_model
-        type: CompiledNode
-        description: >
-          A graph node object that is being checked for referencing immature models.
-      - name: warning_maturity_levels
-        type: List[String]
-        description: A list of maturity levels that we want to consider being immature.
