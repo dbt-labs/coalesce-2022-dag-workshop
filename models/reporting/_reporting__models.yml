@@ -15,6 +15,7 @@ models:
       - name: order_year
         description: year of the order
 
+
   - name: rpt_department_warehouse_usage
     meta:
       maturity: low
@@ -26,8 +27,8 @@ models:
       - name: materialization_month
         description: Month of the materialization_event
 
-  - name: rpt_monthly_gross_revenue
 
+  - name: rpt_monthly_gross_revenue
     meta:
       maturity: medium
       owner:
