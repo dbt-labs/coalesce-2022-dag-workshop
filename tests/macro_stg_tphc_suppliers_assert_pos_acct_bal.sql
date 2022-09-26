@@ -1,4 +1,4 @@
--- depends_on: {{ ref('stg_tpch_suppliers') }}
+-- depends_on: {{ ref('stg_tpch__suppliers') }}
 
 {{
     config(
@@ -9,4 +9,4 @@
 }}
 
 
-{{ test_all_values_gte_zero('stg_tpch_suppliers', 'account_balance') }}
+{{ test_all_values_gte_zero('stg_tpch__suppliers', 'account_balance') }}

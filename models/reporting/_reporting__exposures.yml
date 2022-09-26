@@ -30,4 +30,19 @@ exposures:
 
     # IMPORTANT: determines the lineage relationship of the exposure construct to the rest of your DAGs
     depends_on:
-      - ref('agg_ship_modes_pivot')
+      - ref('rpt_ship_modes_pivot')
+
+  - name: active_orders
+    type: dashboard
+    maturity: high
+    url: https://fishtown.looker.com/dashboards/493
+    description:
+      Did someone say "exponential growth"?
+
+    depends_on:
+      - ref('fct_order_items')
+      - ref('dim_suppliers')
+
+    owner:
+      name: Isabela
+      email: isabela@dbtlabs.com

@@ -6,21 +6,21 @@
 
 with supplier as (
 
-    select * from {{ ref('stg_tpch_suppliers') }}
+    select * from {{ ref('stg_tpch__suppliers') }}
 
 ),
 nation as (
 
-    select * from {{ ref('stg_tpch_nations') }}
+    select * from {{ ref('stg_tpch__nations') }}
 ),
 region as (
 
-    select * from {{ ref('stg_tpch_regions') }}
+    select * from {{ ref('stg_tpch__regions') }}
 
 ),
 final as (
 
-    select 
+    select
         supplier.supplier_key,
         supplier.supplier_name,
         supplier.supplier_address,
@@ -32,7 +32,7 @@ final as (
         supplier
     inner join nation
             on supplier.nation_key = nation.nation_key
-    inner join region 
+    inner join region
             on nation.region_key = region.region_key
 )
 
