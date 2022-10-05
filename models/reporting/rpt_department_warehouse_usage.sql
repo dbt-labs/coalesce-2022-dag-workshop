@@ -1,3 +1,10 @@
+{{
+    config(
+        enabled=false
+    )
+}}
+
+
 
 {#
     TODO: Use a statement block to obtain a unique list of departments.
