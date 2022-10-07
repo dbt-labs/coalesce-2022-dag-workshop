@@ -5,7 +5,6 @@ models:
   - name: fct_materializations
     description: >
       dbt model materialization events.
-
     meta:
       maturity: low
       owner:

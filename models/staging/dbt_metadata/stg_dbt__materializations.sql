@@ -1,3 +1,10 @@
+{{
+    config(
+        enabled=true
+    )
+}}
+
+
 with
 
 materializations as (
