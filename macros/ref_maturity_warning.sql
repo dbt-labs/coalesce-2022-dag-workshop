@@ -38,11 +38,9 @@
     {% for reference_unique_id in current_model.depends_on.nodes %}
 
         {# Now, grab the graph node for this reference#}
-        {% for node in graph.nodes.values()
-            | selectattr("unique_id", "equalto", reference_unique_id) %}
-            {% do dependencies.append(node) %}
-
-        {% endfor %}
+        {% if reference_unique_id in graph.nodes %}
+            {% do dependencies.append(graph.nodes[reference_unique_id]) %}
+        {% endif %}
 
     {% endfor %}
 
