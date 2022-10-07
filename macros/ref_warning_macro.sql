@@ -1,3 +1,18 @@
+{#
+    Exercise: Create two macros that, in conjunction, check if a given model node
+    has dependency Nodes with a maturity level within the `warning_maturity_levels`.
+    In the TODOs below, there will be opportunities to identify the dependencies for
+    a particular model Node of interest, introspect into the `graph` object to reference
+    specific Nodes, and leverage Node metadata to log messages to the command line.
+
+    Useful links:
+    - `graph` Object: https://docs.getdbt.com/reference/dbt-jinja-functions/graph
+    - Node Object: https://schemas.getdbt.com/dbt/manifest/v6/index.html#tab-pane_nodes_additionalProperties_oneOf_i2
+    - The `log()` function: https://schemas.getdbt.com/dbt/manifest/v6/index.html#tab-pane_nodes_additionalProperties_oneOf_i2
+#}
+
+
+
 {% macro ref_maturity_warning(current_model, warning_maturity_levels) %}
 
     {# We can only access graph object during execution. #}
