@@ -1,3 +1,18 @@
+{#
+    Exercise: Create a macro that stores model run results (materializations) after each
+    run. For this exercise, we want to create a list of model materialization results, that
+    can be stored the the data warehouse by crafting a custom table to store this data. In
+    the TODOs below, there will be opportunities to identify model materialization results,
+    determine if a new table is being created, or if new records are being inserted, and lastly
+    to craft the specific select statement that will provide the desired information.
+
+    Useful links:
+    - Results Object: https://docs.getdbt.com/reference/dbt-classes#result-objects
+    - Node Object: https://schemas.getdbt.com/dbt/manifest/v6/index.html#tab-pane_nodes_additionalProperties_oneOf_i2
+    - `on-run-end`: https://schemas.getdbt.com/dbt/manifest/v6/index.html#tab-pane_nodes_additionalProperties_oneOf_i2
+#}
+
+
 {% macro store_materialization_results(results, table_name) %}
 
   {%- set central_tbl -%}
