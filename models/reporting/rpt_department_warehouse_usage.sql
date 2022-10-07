@@ -30,4 +30,4 @@ select
 
     {% endfor %}
 
-from {{ ref(
+from {{ ref('fct_materializations') }}
