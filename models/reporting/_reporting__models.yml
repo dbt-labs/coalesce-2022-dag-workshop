@@ -26,3 +26,14 @@ models:
       - name: order_month
         tests:
           - unique
+
+  - name: rpt_department_warehouse_usage
+    meta:
+      maturity: low
+      owner:
+        email: nicholas@jaffle.shop
+        department: Analytics
+
+    columns:
+      - name: materialization_month
+        description: Month of the materialization_event

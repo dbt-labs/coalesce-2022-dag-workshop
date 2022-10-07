@@ -1,5 +1,21 @@
+{#
+    Exercise: Create a macro that stores model run results (materializations) after each
+    run. For this exercise, we want to create a list of model materialization results, that
+    can be stored the the data warehouse by crafting a custom table to store this data. In
+    the TODOs below, there will be opportunities to identify model materialization results,
+    determine if a new table is being created, or if new records are being inserted, and lastly
+    to craft the specific select statement that will provide the desired information.
+
+    Useful links:
+    - Results Object: https://docs.getdbt.com/reference/dbt-classes#result-objects
+    - Node Object: https://schemas.getdbt.com/dbt/manifest/v6/index.html#tab-pane_nodes_additionalProperties_oneOf_i2
+    - `on-run-end`: https://schemas.getdbt.com/dbt/manifest/v6/index.html#tab-pane_nodes_additionalProperties_oneOf_i2
+#}
+
+
 {% macro store_materialization_results(results, table_name) %}
 
+  {# Format a compelete table object string for use during data storage #}
   {%- set central_tbl -%}
     {{ target.schema }}.{{ table_name }}
   {%- endset -%}
@@ -9,12 +25,14 @@
     {%- do materialization_results.append(result) -%}
   {%- endfor -%}
 
-  {# if no models were materialized, do nothing! #}
+
+  {#
+    Checking the `materialization_results` list if no models were materialized, return a no-op SQL query.
+    This can be something like SELECT 1
+  #}
   {% if materialization_results | length == 0 -%}
     {{ return('select 1') }}
   {%- endif -%}
-
-  {{ log("Processing materialization results. Results will be stored in `" + central_tbl ~ "`.", info = true) if execute }}
 
   {#
 		Check if the target table exists. If it does, then insert into it. Otherwise, create it.
@@ -39,6 +57,7 @@
         {% do timing.update({ timing_record['name']: {
             'started_at': timing_record['started_at'],
             'completed_at': timing_record['completed_at']
+
           } }) %}
       {% endfor %}
 
