@@ -10,7 +10,7 @@
 
 {{
     config(
-        enabled=false
+        enabled=False
     )
 }}
 
