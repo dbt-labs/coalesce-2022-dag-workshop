@@ -12,12 +12,9 @@ sources:
           Model materialization metadata from previous dbt runs.
         columns:
           - name: materialization_id
-            description: > 
-              Unique ID for every materialization of a model. Created as a 
+            description: >
+              Unique ID for every materialization of a model. Created as a
               surrogate key of invocation_id and node_unique_id.
-            tests: 
-              - not_null
-              - unique
 
           - name: node_unique_id
           - name: invocation_id

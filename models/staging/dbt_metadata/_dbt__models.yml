@@ -5,7 +5,7 @@ models:
   - name: stg_dbt__materializations
     description: >
       dbt model materialization events from every dbt run.
-    
+
     meta:
       maturity: low
       owner:
@@ -13,6 +13,14 @@ models:
         department: Analytics
 
     columns:
+
+      - name: materialization_id
+        description: >
+          Unique ID for every materialization of a model. Created as a
+          surrogate key of invocation_id and node_unique_id.
+        tests:
+          - not_null
+          - unique
 
       - name: maturity
         description: >
@@ -25,9 +33,8 @@ models:
 
       - name: department
         description: >
-          The department that owns this model at the time of materialization. 
-      
+          The department that owns this model at the time of materialization.
+
       - name: email
         description: >
           The email address of the model owner at the time of materialization.
-          

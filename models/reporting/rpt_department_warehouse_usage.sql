@@ -8,7 +8,18 @@
     Statement Block: https://docs.getdbt.com/reference/dbt-jinja-functions/statement-blocks
 #}
 
+{{
+    config(
+        enabled=true
+    )
+}}
 
+
+{#
+    TODO: Use a statement block to obtain a unique list of departments.
+    the output of the associated load_result should go into a variable named
+    `departments`.
+#}
 {%- call statement('departments', fetch_result=True) -%}
 
     {# this pulls the unique departments from the fct_materializations table #}

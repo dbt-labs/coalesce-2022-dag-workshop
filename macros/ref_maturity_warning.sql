@@ -11,6 +11,7 @@
     - The `log()` function: https://schemas.getdbt.com/dbt/manifest/v6/index.html#tab-pane_nodes_additionalProperties_oneOf_i2
 #}
 
+
 {% macro ref_maturity_warning(current_model, warning_maturity_levels) %}
 
     {# We can only access graph object during execution. #}
@@ -22,9 +23,15 @@
     {# Create a model list to store any low-maturity models #}
     {% set immature_model_list = [] %}
 
-    {# Now, grab the graph node for this reference#}
+    {# Now, grab the graph node for this reference #}
     {% for node in get_model_dependency_nodes(current_model) %}
 
+        {#
+            TODO: For each Node returned by get_model_dependency_nodes,
+            check if the maturity of the node stored in the nodes meta field.
+            If the value is contained within the `warning_maturity_levels`
+            list, then add the node name to the immature_model_list.
+        #}
         {# Check the maturity! If it's "low", then add it to the model_list #}
         {% if node.config.meta.maturity in warning_maturity_levels %}
             {% do immature_model_list.append(node.name) %}
@@ -32,6 +39,11 @@
 
     {% endfor %}
 
+    {#
+        TODO: If there are values in the `immature_model_list`, then
+        log a message that warns the user that there have been references
+        to immature models.
+    #}
     {# If there are items in model_list, then raise a warning. #}
     {% if immature_model_list | length > 0 %}
         {{ log(
@@ -41,6 +53,7 @@
         ) }}
     {% endif %}
 
+
 {% endmacro %}
 
 
@@ -48,6 +61,11 @@
 
     {% set dependencies = [] %}
 
+    {#
+        TODO: For each unique_id stored in the model's node dependency list,
+        `current_model.depends_on.nodes`, grab the related Node from the graph
+        and add it to the `dependencies`list.
+    #}
     {% for reference_unique_id in current_model.depends_on.nodes %}
 
         {# Now, grab the graph node for this reference#}
@@ -58,5 +76,4 @@
     {% endfor %}
 
     {{ return(dependencies) }}
-
 {% endmacro %}

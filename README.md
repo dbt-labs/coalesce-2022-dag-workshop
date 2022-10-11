@@ -20,9 +20,7 @@ In this workshop, you’ll learn how to create and document macros that leverage
 
 This dbt project repository is used as part of the _Get more out of your DAG_ workshop presented at [coalesce 2022][coalesce].
 
-## Getting Started
-
-
+The slide deck for this workshop presentation can be found [here][slide_deck].
 
 ## Authors
 
@@ -33,3 +31,4 @@ This workshop includes material from the following authors:
 
 
 [coalesce]: https://coalesce.getdbt.com/agenda/workshop-get-more-out-of-your-dag
+[slide_deck]: https://docs.google.com/presentation/d/1Nakkgp-RzeJ9Q5x_cVzafuud7U_1cwJGW7ei9cxTo7E/edit?usp=sharing
