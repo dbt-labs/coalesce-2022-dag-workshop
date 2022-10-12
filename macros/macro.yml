@@ -19,6 +19,13 @@ macros:
         type: STRING
         description: name of the column being tested
 
+  - name: fake_results
+    description: Return a list of mock results for demonstrative purposes.
+    arguments:
+      - name: count
+        type: INT
+        description: The number of fake results to return. Set to 10 by default.
+
   - name: store_materialization_results
     description: >
       Parse dbt's result object for model materializations, and store the
