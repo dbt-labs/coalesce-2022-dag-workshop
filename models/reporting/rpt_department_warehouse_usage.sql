@@ -54,7 +54,7 @@ select
 
         case 
             when owner_department = '{{department}}'
-                then execution_department_duration
+                then execution_duration
             end
     )
 
