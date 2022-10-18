@@ -28,7 +28,9 @@
     at the result Node's resource_type. If it is a model, then add it to the materialization_results list.
   #}
 
-  {# Logic here! #}
+      {%- for result in results if result.node.resource_type == 'model' -%}
+        {%- do materialization_results.append(result) -%}
+      {%- endfor -%}
 
   {#
     Checking the `materialization_results` list if no models were materialized, return a no-op SQL query.
