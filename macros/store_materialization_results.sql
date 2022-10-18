@@ -24,17 +24,7 @@
   {%- set materialization_results = [] -%}
     {% for node in graph.nodes.values()  %}
         {% if node.resource_type in ('model', 'test') %}
-            {% do results.append({
-                'status': node.status,
-                'execution_time': node.execution_time,
-                'thread_id': node.thread_id,
-                'timing': [node.execution_started_at, node.execution_completed_at],
-                'adapter_response': {
-                    'rows_affected': node.rows_affected,
-                },
-                'message': node.message,
-                'node': node
-            }) %}
+            {% do materialization_results.append(result) %}
         {% endif %}
 
   {#
@@ -56,13 +46,9 @@
 
   {% for result in materialization_results %}
     {% set insert_statement = {% 'insert into ' ~ central_table_exists ~ ' ' %}
-  {#
-    TODO: Add logic to set the query returned by this macro to either insert into {{ central_tbl }} or
-    create table the table using the records processed below depending on the current existance of the table.
-  #}
 
-  {# Logic here!#}
-
+  {% if central_table_exists%}
+    {% do }
   {# For each result in the run result set, process and store the result. #}
   {% for result in materialization_results %}
 
