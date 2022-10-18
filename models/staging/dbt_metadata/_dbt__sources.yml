@@ -15,7 +15,6 @@ sources:
             description: >
               Unique ID for every materialization of a model. Created as a
               surrogate key of invocation_id and node_unique_id.
-
           - name: node_unique_id
           - name: invocation_id
           - name: model
