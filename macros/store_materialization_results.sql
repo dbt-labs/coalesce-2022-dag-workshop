@@ -48,7 +48,10 @@
     {% set insert_statement = {% 'insert into ' ~ central_table_exists ~ ' ' %}
 
   {% if central_table_exists%}
-    {% do }
+       insert into {{ central_tbl }} (
+    {% else %}
+        create table {{ central_tbl }} as (
+  {% endif %}
   {# For each result in the run result set, process and store the result. #}
   {% for result in materialization_results %}
 
