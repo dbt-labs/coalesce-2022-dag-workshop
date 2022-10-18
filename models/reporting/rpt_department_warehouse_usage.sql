@@ -35,7 +35,11 @@ Secondly, you will need to go into the following model files and enable them by 
     `departments`.
 #}
 
+{%- call statement('departments', fetch_results=True) -%}
 
+    select distinct department from {{ ref('') }}
+
+{%- endcall -%}
 
 {% set departments = load_result('departments').table.columns[0].values() %}
 
