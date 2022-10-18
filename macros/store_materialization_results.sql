@@ -27,6 +27,16 @@
     TODO: Iterate though the results, check if the result pertains to a model by looking
     at the result Node's resource_type. If it is a model, then add it to the materialization_results list.
   #}
+    {% set results = fake_results() %}
+
+    {{ results }}
+
+    {{ results[0].node }}
+
+    {% for result in results if result.node.resource_type == 'model' %}
+        {do materialization_results.append(result)}
+
+    {% endfor %}
 
   {# Logic here! #}
 
