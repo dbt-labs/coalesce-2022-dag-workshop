@@ -29,6 +29,11 @@
   #}
 
   {# Logic here! #}
+  {% for result in results %}
+    {% if result.node.resource_type == 'model' %}
+        {% do materialization_results.append(result) %}
+    {% endif %}
+  {% endfor %}
 
   {#
     Checking the `materialization_results` list if no models were materialized, return a no-op SQL query.
@@ -53,6 +58,11 @@
   #}
 
   {# Logic here!#}
+    {% if central_table_exists %}
+        insert into {{ central_tbl }} (
+    {% else %}
+        create table {{ central_tbl }} as (
+    {% endif %}
 
   {# For each result in the run result set, process and store the result. #}
   {% for result in materialization_results %}
@@ -79,14 +89,14 @@
 
       select
       {{ dbt_utils.surrogate_key( ["'" ~ invocation_id ~ "'" , "'" ~ result.node.unique_id ~ "'" ] ) }} as materialization_id,
-      null as node_unique_id,
-      null as invocation_id,
-      null as model,
-      null as status,
-      to_variant(parse_json('{{ tojson(result.node.config.meta) }}')) as meta,
-      null::timestamptz as execution_started_at,
-      null::timestamptz as execution_completed_at,
-      null::float as execution_time_seconds,
+    '{{ result.node.unique_id }}'::text as node_unique_id,
+    '{{ invocation_id }}'::text as invocation_id,
+    '{{ result.node.name }}'::text as model,
+    '{{ result.status }}'::text as status,
+    to_variant(parse_json('{{ tojson(result.node.config.meta) }}')) as meta,
+    '{{ timing["execute"]["started_at"] }}'::timestamptz as execution_started_at,
+    '{{ timing["execute"]["completed_at"] }}'::timestamptz as execution_completed_at,
+    '{{ result.execution_time }}'::float as execution_time_seconds,
       current_timestamp as recorded_at
 
       {{ "union all" if not loop.last }}
@@ -94,7 +104,5 @@
   {% endfor %}
 
   );
-
-
 
 {% endmacro %}

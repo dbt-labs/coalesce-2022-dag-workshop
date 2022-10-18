@@ -35,6 +35,9 @@
             If the value is contained within the `warning_maturity_levels`
             list, then add the node name to the immature_model_list.
         #}
+        {% if node.meta['maturity'] == 'warning_maturity_levels' %}
+            {% do immature_model_list.append(node.name) %}
+        {% endif %}
 
     {% endfor %}
 
@@ -43,6 +46,9 @@
         log a message that warns the user that there have been references
         to immature models.
     #}
+    {% if immature_model_list.length > 0 %}
+        {% log('WARNING!! THIS MODEL REFERENCES ONE OR MORE LOW_MATURITY_MODELS') %}
+    {% endif %}
 
 
 {% endmacro %}

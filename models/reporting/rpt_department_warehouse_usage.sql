@@ -44,12 +44,13 @@ select
 
     {# Loop over departments array from above, and sum execution time based on whether the record matches the department#}
     {%- for department in departments -%}
-
-        {#
-            TODO: Implement the SQL logic required to only sum the
-            durations for the selected department in this part of
-            the loop.
-        #}
+        sum(
+            case
+                when owner_department = '{{department}}'
+                    then execution_duration
+            end
+        ) as "{{department | lower |replace(' ', '_')}}_duration"
+        {%- if not loop.last -%},{% endif %}
 
     {% endfor %}
 
