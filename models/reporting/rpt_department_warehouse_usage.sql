@@ -23,10 +23,9 @@ Secondly, you will need to go into the following model files and enable them by 
 
 {{
     config(
-        enabled=False
+        enabled=true
     )
 }}
-
 
 
 {#
@@ -34,23 +33,28 @@ Secondly, you will need to go into the following model files and enable them by 
     the output of the associated load_result should go into a variable named
     `departments`.
 #}
+{%- call statement('departments', fetch_result=True) -%}
 
+    {# this pulls the unique departments from the fct_materializations table #}
+    select distinct owner_department from {{ ref('fct_materializations') }}
 
+{%- endcall %}
 
 {% set departments = load_result('departments').table.columns[0].values() %}
 
 select
-    date_trunc('month', executed_at) as materialization_month,
+    date_part('month', executed_at) as materialization_month,
 
     {# Loop over departments array from above, and sum execution time based on whether the record matches the department#}
     {%- for department in departments -%}
-
-        {#
-            TODO: Implement the SQL logic required to only sum the
-            durations for the selected department in this part of
-            the loop.
-        #}
-
+        sum(
+            case
+                when owner_department = '{{department}}'
+                    then execution_duration
+            end
+        ) as "{{department | lower |replace(' ', '_')}}_duration"
+        {%- if not loop.last -%},{% endif %}
     {% endfor %}
 
 from {{ ref('fct_materializations') }}
+group by 1
