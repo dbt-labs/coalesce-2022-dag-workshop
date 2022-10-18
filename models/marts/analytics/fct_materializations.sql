@@ -1,10 +1,3 @@
-{{
-    config(
-        enabled=False
-    )
-}}
-
-
 with
 
 final as (
