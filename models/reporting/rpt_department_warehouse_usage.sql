@@ -21,12 +21,6 @@ Secondly, you will need to go into the following model files and enable them by 
 
 #}
 
-{{
-    config(
-        enabled=False
-    )
-}}
-
 
 
 {#
@@ -34,8 +28,12 @@ Secondly, you will need to go into the following model files and enable them by 
     the output of the associated load_result should go into a variable named
     `departments`.
 #}
+-- {{ ref('fct_materializations') }}
+{% call statement('departments', fetch_result=True -%}
 
+select distinct owner_department from {{ ref('fct_materializations') }}
 
+{%- endcall %}
 
 {% set departments = load_result('departments').table.columns[0].values() %}
 
@@ -45,11 +43,7 @@ select
     {# Loop over departments array from above, and sum execution time based on whether the record matches the department#}
     {%- for department in departments -%}
 
-        {#
-            TODO: Implement the SQL logic required to only sum the
-            durations for the selected department in this part of
-            the loop.
-        #}
+        sum( case when owner_department = '{{department}}') then execution_duration end) as "{{department}}_duration"
 
     {% endfor %}
 
