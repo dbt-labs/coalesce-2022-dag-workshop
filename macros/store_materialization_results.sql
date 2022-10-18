@@ -13,7 +13,7 @@
 #}
 
 
-{% macro store_materialization_results(results, table_name) %}
+{% macro store_materialization_results(results, table_name = 'test_table') %}
 
   {# Format a compelete table object string for use during data storage #}
   {%- set central_tbl -%}
@@ -22,13 +22,20 @@
 
   {# Create a list of materialization results for model resource types specifically. #}
   {%- set materialization_results = [] -%}
-
-  {#
-    TODO: Iterate though the results, check if the result pertains to a model by looking
-    at the result Node's resource_type. If it is a model, then add it to the materialization_results list.
-  #}
-
-  {# Logic here! #}
+    {% for node in graph.nodes.values()  %}
+        {% if node.resource_type in ('model', 'test') %}
+            {% do results.append({
+                'status': node.status,
+                'execution_time': node.execution_time,
+                'thread_id': node.thread_id,
+                'timing': [node.execution_started_at, node.execution_completed_at],
+                'adapter_response': {
+                    'rows_affected': node.rows_affected,
+                },
+                'message': node.message,
+                'node': node
+            }) %}
+        {% endif %}
 
   {#
     Checking the `materialization_results` list if no models were materialized, return a no-op SQL query.
@@ -47,6 +54,8 @@
   {% set central_table_query %} {{ dbt_utils.get_tables_by_pattern_sql(target.schema | upper,  table_name ) }} {% endset %}
   {% set central_table_exists = run_query(central_table_query) %}
 
+  {% for result in materialization_results %}
+    {% set insert_statement = {% 'insert into ' ~ central_table_exists ~ ' ' %}
   {#
     TODO: Add logic to set the query returned by this macro to either insert into {{ central_tbl }} or
     create table the table using the records processed below depending on the current existance of the table.
