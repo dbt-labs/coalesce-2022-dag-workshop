@@ -12,7 +12,7 @@
 {#
 
 In order to successfully run this model, first ensure you have a working store_materialization_results macro and then do a dbt run.
-You can copy and paste a working solution from the checkpoint_1 branch if you need to. 
+You can copy and paste a working solution from the _checkpoint_1 branch if you need to. 
 
 Secondly, you will need to go into the following model files and enable them by deleting the config block and saving:
 
