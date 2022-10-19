@@ -1,4 +1,4 @@
-{#
+{#-
     Exercise: Create two macros that, in conjunction, check if a given model node
     has dependency Nodes with a maturity level within the `warning_maturity_levels`.
     In the TODOs below, there will be opportunities to identify the dependencies for
@@ -9,7 +9,7 @@
     - `graph` Object: https://docs.getdbt.com/reference/dbt-jinja-functions/graph
     - Node Object: https://schemas.getdbt.com/dbt/manifest/v6/index.html#tab-pane_nodes_additionalProperties_oneOf_i2
     - The `log()` function: https://schemas.getdbt.com/dbt/manifest/v6/index.html#tab-pane_nodes_additionalProperties_oneOf_i2
-#}
+-#}
 
 
 
@@ -35,6 +35,9 @@
             If the value is contained within the `warning_maturity_levels`
             list, then add the node name to the immature_model_list.
         #}
+        {% if node.models.meta.maturity in warning_maturity_levels %}
+            {% do immature_model_list.append(node.name) %}
+        {% endif %}
 
     {% endfor %}
 
@@ -43,7 +46,13 @@
         log a message that warns the user that there have been references
         to immature models.
     #}
-
+    {% if immature_model_list | length > 0 %}
+        {{ log(
+            "WARNING: There are immature models referenced by "~ current_model ~". "~
+            "The immature models are "~ ','.join(immature_model_list),
+            info=True
+        ) }}
+    {% endif %}
 
 {% endmacro %}
 
@@ -57,5 +66,9 @@
         `current_model.depends_on.nodes`, grab the related Node from the graph
         and add it to the `dependencies`list.
     #}
+    {% if reference_unique_id in graph.nodes %}
+        {% do dependencies.append(graph.nodes[reference_unique_id]) %}
+    {% endif %}
+
     {{ return(dependencies) }}
 {% endmacro %}

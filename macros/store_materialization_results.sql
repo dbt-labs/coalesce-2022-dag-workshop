@@ -29,6 +29,10 @@
   #}
 
   {# Logic here! #}
+  {% for result in results if result.node.resource_type == 'model' %}
+    {% do materialization_results.append(result) %}
+  {% endfor %}
+  
 
   {#
     Checking the `materialization_results` list if no models were materialized, return a no-op SQL query.
@@ -53,6 +57,11 @@
   #}
 
   {# Logic here!#}
+  {% if central_table_exists %}
+    insert into {{ central_tbl }} (
+  {% else %}
+    create table {{ central_tbl }} as (
+  {% endif %}
 
   {# For each result in the run result set, process and store the result. #}
   {% for result in materialization_results %}
