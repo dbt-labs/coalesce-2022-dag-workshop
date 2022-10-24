@@ -46,7 +46,8 @@
 
 
     {# Check if the target table exists. If it does, then insert into it. Otherwise, create it. #}
-    {% set central_table_query %} {{ dbt_utils.get_tables_by_pattern_sql(target.schema | upper,  table_name ) }} {% endset %}
+    {% set central_table_query %} 
+    {{ dbt_utils.get_tables_by_pattern_sql(target.schema | upper,  table_name ) }} {% endset %}
     {% set central_table_exists = run_query(central_table_query) %}
 
     {#
