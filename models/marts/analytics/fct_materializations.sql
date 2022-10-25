@@ -1,6 +1,6 @@
 {{
     config(
-        enabled=False
+        enabled=True
     )
 }}
 
